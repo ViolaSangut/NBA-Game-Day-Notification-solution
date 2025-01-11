@@ -1,146 +1,83 @@
-# NBA Game Day Notifications / Sports Alerts System
+# DAY 2 DevOps Challange 
+# NBA Game Day Notification System
 
 ## **Project Overview**
-This project is an alert system that sends real-time NBA game day score notifications to subscribed users via SMS/Email. It leverages **Amazon SNS**, **AWS Lambda and Python**, **Amazon EvenBridge** and **NBA APIs** to provide sports fans with up-to-date game information. The project demonstrates cloud computing principles and efficient notification mechanisms.
+This is a NBA game notification system that allows users to allows users to subscribe to daily game updates. 
 
----
-
-## **Features**
-- Fetches live NBA game scores using an external API.
-- Sends formatted score updates to subscribers via SMS/Email using Amazon SNS.
-- Scheduled automation for regular updates using Amazon EventBridge.
-- Designed with security in mind, following the principle of least privilege for IAM roles.
-
-## **Prerequisites**
-- Free account with subscription and API Key at [sportsdata.io](https://sportsdata.io/)
-- Personal AWS account with basic understanding of AWS and Python
-
----
-
-## **Technical Architecture**
-![nba_API](https://github.com/user-attachments/assets/5e19635e-0685-4c07-9601-330f7d1231f9)
-
-
+## Tools used
+1. **Amazon SNS** - This is where we will create a subscription topic where users will subscribe to.
+2. **AWS Lambda** - We will create two lambda functions in Python to send game notifications and another to subscribe our users
+3. **Amazon EvenBridge** - Help us schedule our game notifications. We will create schedule rules that will trigger our lambda function to send the notifications.
+4. **NBA APIs (SportsData.io)** - This will help us pull the games data from the NBA Systems.
+5. **API Gateway** - Helps us build an API to expose our backend service to users.
+6. **HTML/CSS/JAVASCRIPT** - For the web interface where users enter their email.
+   
 ---
 
 
-## **Technologies**
-- **Cloud Provider**: AWS
-- **Core Services**: SNS, Lambda, EventBridge
-- **External API**: NBA Game API (SportsData.io)
-- **Programming Language**: Python 3.x
-- **IAM Security**:
-  - Least privilege policies for Lambda, SNS, and EventBridge.
 
----
+## PART 1: CREATING THE BACKEND SERVICE
+1. Create AWS SNS topic in the AWS SNS service.
+2. Add an Email subscription to the topic created. A confirmation email will be sent to the email used in the subscription.
+3. Create an SNS Publish Policy that will allow us to publish to the SNS topic. Copy the gb_sns_policy.json from the repos and use it to create the policy. Set your topic ARN as the resource.
+   **"Resource": "YOUR SNS TOPIC ARN"**
+   
+4. Create am AWS IAM role for the lambda function to allow the function to publish to the SNS topic. Attach the previuosly created publishing policy and the AWSLambdaBasicExecutionRole policy to the role created.
+5. Next we need to create a python lambda function that will interract with the NBA API to collect the NBA data, format it, and send it to the subscribed emails in the SNS service. Attach the IAM role created Lambda function created.
+6. Create a Free account with subscription at [sportsdata.io](https://sportsdata.io/) and get your API key.
+7. Create Environment variables for your Lambda function and add the NBA API key and SNS TOPIC ARN.
+   - NBA_API_KEY: your NBA API key.
+   - SNS_TOPIC_ARN: SNS TOPIC ARN
+8.  Deploy the Lambda function.
+9. Create a Schedule rule by navigating to the EventBridge service. Set A CRON Job Schedule for how frequent you want the game updates. Attach the Lambda Function to the schedule rule.
+10. Test the Lambda function by running it. the subscribed emails should get game updates in their email when the function is triggered.
 
-## **Project Structure**
-```bash
-game-day-notifications/
-├── src/
-│   ├── gd_notifications.py          # Main Lambda function code
-├── policies/
-│   ├── gb_sns_policy.json           # SNS publishing permissions
-│   ├── gd_eventbridge_policy.json   # EventBridge to Lambda permissions
-│   └── gd_lambda_policy.json        # Lambda execution role permissions
-├── .gitignore
-└── README.md                        # Project documentation
-```
+# **Subscribing users to the SNS Topic.**
+ 
+ <p>We need to create Function that will help us add subscribers to the SNS topic</p>
 
-## **Setup Instructions**
+1. Create an SNS Subscribe policy. Locate the policy in the repository under the policies folder.
+2. Create an IAM role and attach the created policy together with the AWSLambdaBasicExecutionRole policy.
+3. Create A Lambda function and copy the code from src/sub_func.py. Attach the created role to the lambda function. This role will allow the lambda function to add email subscribers to the SNS topic.
+4. Create an Environment Variable to store the sns topic ARN. (the topic we want to subscribe usrs to).
+5. Test the function in the test section by entering an email as an endpoint.
+   {
+    "endpoint": "test@example.com"
+   }
 
-### **Clone the Repository**
-```bash
-git clone https://github.com/ifeanyiro9/game-day-notifications.git
-cd game-day-notifications
-```
+7. The email should receive a confirmation email to sub to the SNS Topic.
 
-### **Create an SNS Topic**
-1. Open the AWS Management Console.
-2. Navigate to the SNS service.
-3. Click Create Topic and select Standard as the topic type.
-4. Name the topic (e.g., gd_topic) and note the ARN.
-5. Click Create Topic.
+<p>So Far we have created a backend service to add subsribers to an SNS Service and another push NBA Updates to the subscribes emails. We finally need to expose these services to users using a frontend service.</p>
 
-### **Add Subscriptions to the SNS Topic**
-1. After creating the topic, click on the topic name from the list.
-2. Navigate to the Subscriptions tab and click Create subscription.
-3. Select a Protocol:
-- For Email:
-  - Choose Email.
-  - Enter a valid email address.
-- For SMS (phone number):
-  - Choose SMS.
-  - Enter a valid phone number in international format (e.g., +1234567890).
+1. Navigate to the API Gateway and create a REST API.
+2. Create a POST route for the API.
+3. Enable CORS for the API to Allow our frontend service to interact with the API.
+4. Since our frontend will be running on our local host:
+   <P>Add **http://localhost:8080** as the **Access-Control-Allow-Origin**.</P>
+   <P>Add  **content-type** as the  **Access-Control-Allow-Headers** .</P>
+   <P> Add POST as **Access-Control-Allow-Methods**.</P>
+   
+6.  Deploy the API under your desired stsge ie test, dev or prod.
+7.  Obtain the InvokeURL that we will use to invoke the API in our frontend service.
+8.  Navigate to the Test section to test the API. Add the json in the below format in the request body section.
+   {
+    "endpoint": "test@example.com"
+   }
+9. The email should receive a confrimation email in their inbox.
+10. If that works well you can test the API again on postman to make sure you are getting the confirmation email in your inbox.
 
-4. Click Create Subscription.
-5. If you added an Email subscription:
-- Check the inbox of the provided email address.
-- Confirm the subscription by clicking the confirmation link in the email.
-6. For SMS, the subscription will be immediately active after creation.
+# PART 2: CREATING THE WEB UI FOR USERS WITH HTML/CSS/JS 
+<p>We need to create a form where users can enter their email to subscribe to the game updates.</p>
+   
+1. In the sub.html file uder the web_ui folder set the invokeURL.
+2. Run a  python local server using the following command:python3 -m http.server 8080
+3. Go to the browser and search http://localhost:8080/sub.html.
+4. You will view the subscription form , enter an email and click on subscribe. If the set up works well, you should receive a confirmation email in the inbox of the entered email and a message that the email has been sent!!
 
-### **Create the SNS Publish Policy**
-1. Open the IAM service in the AWS Management Console.
-2. Navigate to Policies → Create Policy.
-3. Click JSON and paste the JSON policy from gd_sns_policy.json file
-4. Replace REGION and ACCOUNT_ID with your AWS region and account ID.
-5. Click Next: Tags (you can skip adding tags).
-6. Click Next: Review.
-7. Enter a name for the policy (e.g., gd_sns_policy).
-8. Review and click Create Policy.
-
-### **Create an IAM Role for Lambda**
-1. Open the IAM service in the AWS Management Console.
-2. Click Roles → Create Role.
-3. Select AWS Service and choose Lambda.
-4. Attach the following policies:
-- SNS Publish Policy (gd_sns_policy) (created in the previous step).
-- Lambda Basic Execution Role (AWSLambdaBasicExecutionRole) (an AWS managed policy).
-5. Click Next: Tags (you can skip adding tags).
-6. Click Next: Review.
-7. Enter a name for the role (e.g., gd_role).
-8. Review and click Create Role.
-9. Copy and save the ARN of the role for use in the Lambda function.
-
-### **Deploy the Lambda Function**
-1. Open the AWS Management Console and navigate to the Lambda service.
-2. Click Create Function.
-3. Select Author from Scratch.
-4. Enter a function name (e.g., gd_notifications).
-5. Choose Python 3.x as the runtime.
-6. Assign the IAM role created earlier (gd_role) to the function.
-7. Under the Function Code section:
-- Copy the content of the src/gd_notifications.py file from the repository.
-- Paste it into the inline code editor.
-8. Under the Environment Variables section, add the following:
-- NBA_API_KEY: your NBA API key.
-- SNS_TOPIC_ARN: the ARN of the SNS topic created earlier.
-9. Click Create Function.
-
-
-### **Set Up Automation with Eventbridge**
-1. Navigate to the Eventbridge service in the AWS Management Console.
-2. Go to Rules → Create Rule.
-3. Select Event Source: Schedule.
-4. Set the cron schedule for when you want updates (e.g., hourly).
-5. Under Targets, select the Lambda function (gd_notifications) and save the rule.
-
-
-### **Test the System**
-1. Open the Lambda function in the AWS Management Console.
-2. Create a test event to simulate execution.
-3. Run the function and check CloudWatch Logs for errors.
-4. Verify that SMS notifications are sent to the subscribed users.
-
-
-### **What We Learned**
-1. Designing a notification system with AWS SNS and Lambda.
-2. Securing AWS services with least privilege IAM policies.
-3. Automating workflows using EventBridge.
-4. Integrating external APIs into cloud-based workflows.
+<p>Visit the following blog for a more detailed workthrough of the project.</p>
 
 
 ### **Future Enhancements**
 1. Add NFL score alerts for extended functionality.
 2. Store user preferences (teams, game types) in DynamoDB for personalized alerts.
-3. Implement a web UI
+
