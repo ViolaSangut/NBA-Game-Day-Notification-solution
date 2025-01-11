@@ -8,7 +8,7 @@ This is a NBA game notification system that allows users to allows users to subs
 ## Tools used
 1. **Amazon SNS** - This is where we will create a subscription topic where users will subscribe to.
 2. **AWS Lambda** - We will create two lambda functions in Python to send game notifications and another to subscribe our users
-3. **Amazon EvenBridge** - Help us schedule our game notifications. We will create schedule rules that will trigger our lambda function to send the notifications.
+3. **Amazon EventBridge** - Help us schedule our game notifications. We will create schedule rules that will trigger our lambda function to send the notifications.
 4. **NBA APIs (SportsData.io)** - This will help us pull the games data from the NBA Systems.
 5. **API Gateway** - Helps us build an API to expose our backend service to users.
 6. **HTML/CSS/JAVASCRIPT** - For the web interface where users enter their email.
