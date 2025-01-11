@@ -1,4 +1,4 @@
-# DAY 2 DevOps Challange 
+# DAY 2 DevOps Challenge 
 
 # NBA Game Day Notification System
 ![Untitled Diagram drawio(5)](https://github.com/user-attachments/assets/148c92f7-8641-49e2-bedb-3ca877a5e8d2)
