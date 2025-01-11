@@ -4,6 +4,7 @@
 ## **Project Overview**
 This is a NBA game notification system that allows users to allows users to subscribe to daily game updates. 
 
+
 ## Tools used
 1. **Amazon SNS** - This is where we will create a subscription topic where users will subscribe to.
 2. **AWS Lambda** - We will create two lambda functions in Python to send game notifications and another to subscribe our users
