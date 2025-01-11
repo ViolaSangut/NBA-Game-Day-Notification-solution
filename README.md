@@ -1,4 +1,4 @@
-# DAY 2 DevOps Challange 
+![image](https://github.com/user-attachments/assets/57abf3b6-de12-42f1-9663-7c45ea9630cc)# DAY 2 DevOps Challange 
 # NBA Game Day Notification System
 
 ## **Project Overview**
@@ -58,7 +58,7 @@ This is a NBA game notification system that allows users to allows users to subs
    <P>Add  **content-type** as the  **Access-Control-Allow-Headers** .</P>
    <P> Add POST as **Access-Control-Allow-Methods**.</P>
    
-5.  Deploy the API under your desired stsge ie test, dev or prod.
+5.  Deploy the API under your desired stage ie test, dev or prod.
 6.  Obtain the InvokeURL that we will use to invoke the API in our frontend service.
 7.  Navigate to the Test section to test the API. Add the json in the below format in the request body section.
    {
@@ -75,7 +75,7 @@ This is a NBA game notification system that allows users to allows users to subs
 3. Go to the browser and search http://localhost:8080/sub.html.
 4. You will view the subscription form , enter an email and click on subscribe. If the set up works well, you should receive a confirmation email in the inbox of the entered email and a message that the email has been sent!!
 
-<p>Visit the following blog for a more detailed workthrough of the project.</p>
+<p>Visit the following blog  https://medium.com/@violasangut/nba-game-day-notification-system-using-amazon-sns-aws-lambda-amazon-eventbridge-api-gateway-and-120eb961b2f0 for a more detailed workthrough of the project.</p>
 
 
 ### **Future Enhancements**
