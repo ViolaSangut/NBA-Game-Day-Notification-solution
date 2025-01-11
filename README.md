@@ -58,14 +58,14 @@ This is a NBA game notification system that allows users to allows users to subs
    <P>Add  **content-type** as the  **Access-Control-Allow-Headers** .</P>
    <P> Add POST as **Access-Control-Allow-Methods**.</P>
    
-6.  Deploy the API under your desired stsge ie test, dev or prod.
-7.  Obtain the InvokeURL that we will use to invoke the API in our frontend service.
-8.  Navigate to the Test section to test the API. Add the json in the below format in the request body section.
+5.  Deploy the API under your desired stsge ie test, dev or prod.
+6.  Obtain the InvokeURL that we will use to invoke the API in our frontend service.
+7.  Navigate to the Test section to test the API. Add the json in the below format in the request body section.
    {
     "endpoint": "test@example.com"
    }
-9. The email should receive a confrimation email in their inbox.
-10. If that works well you can test the API again on postman to make sure you are getting the confirmation email in your inbox.
+8. The email should receive a confrimation email in their inbox.
+9. If that works well you can test the API again on postman to make sure you are getting the confirmation email in your inbox.
 
 # PART 2: CREATING THE WEB UI FOR USERS WITH HTML/CSS/JS 
 <p>We need to create a form where users can enter their email to subscribe to the game updates.</p>
