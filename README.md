@@ -34,7 +34,7 @@ This is a NBA game notification system that allows users to allows users to subs
 
 # **Subscribing users to the SNS Topic.**
  
- **We need to create Function that will help us add subscribers to the SNS topic.**
+ <p>We need to create Function that will help us add subscribers to the SNS topic</p>
 
 1. Create an SNS Subscribe policy. Locate the policy in the repository under the policies folder.
 2. Create an IAM role and attach the created policy together with the AWSLambdaBasicExecutionRole policy.
@@ -47,11 +47,26 @@ This is a NBA game notification system that allows users to allows users to subs
 
 7. The email should receive a confirmation email to sub to the SNS Topic.
 
-# So Far we have created a backend service to add subsribers to an SNS Service and another push NBA Updates to the subscribes emails. We finally need to expose these services to users using a frontend service.
+<p>So Far we have created a backend service to add subsribers to an SNS Service and another push NBA Updates to the subscribes emails. We finally need to expose these services to users using a frontend service.</p>
+
 1. Navigate to the API Gateway and create a REST API.
 2. Create a POST route for the API.
-3. Enable CORS for the API to Allow our frontend service to interact with the API. Since our frontend will be running on our local host, add **http://localhost:8080** as the **Access-Control-Allow-Origin**. Add  **content-type** as the  **Access-Control-Allow-Headers** . Add POST as **Access-Control-Allow-Methods**.
-4.  
+3. Enable CORS for the API to Allow our frontend service to interact with the API.
+4. Since our frontend will be running on our local host:
+   <P>Add **http://localhost:8080** as the **Access-Control-Allow-Origin**.</P>
+   <P>Add  **content-type** as the  **Access-Control-Allow-Headers** .</P>
+   <P> Add POST as **Access-Control-Allow-Methods**.</P>
+   
+6.  Deploy the API under your desired stsge ie test, dev or prod.
+7.  Obtain the InvokeURL that we will use to invoke the API in our frontend service.
+8.  Navigate to the Test section to test the API. Add the json in the below format in the request body section.
+   {
+    "endpoint": "test@example.com"
+   }
+9. The email should receive a confrimation email in their inbox.
+10. If that works well you can test the API again on postman to make sure you are getting the confirmation email in your inbox.
+
+
 
    
    
