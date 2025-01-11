@@ -1,5 +1,7 @@
-![image](https://github.com/user-attachments/assets/57abf3b6-de12-42f1-9663-7c45ea9630cc)# DAY 2 DevOps Challange 
+# DAY 2 DevOps Challange 
+
 # NBA Game Day Notification System
+![Untitled Diagram drawio(5)](https://github.com/user-attachments/assets/148c92f7-8641-49e2-bedb-3ca877a5e8d2)
 
 ## **Project Overview**
 This is a NBA game notification system that allows users to allows users to subscribe to daily game updates. 
