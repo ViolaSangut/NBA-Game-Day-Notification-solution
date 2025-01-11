@@ -4,7 +4,7 @@
 ![Untitled Diagram drawio(5)](https://github.com/user-attachments/assets/148c92f7-8641-49e2-bedb-3ca877a5e8d2)
 
 ## **Project Overview**
-This is a NBA game notification system that allows users to allows users to subscribe to daily game updates. 
+This is a NBA game notification system that allows users to subscribe to daily game updates. 
 
 
 ## Tools used
