@@ -23,7 +23,7 @@ This is a NBA game notification system that allows users to allows users to subs
 3. Create an SNS Publish Policy that will allow us to publish to the SNS topic. Copy the gb_sns_policy.json from the repos and use it to create the policy. Set your topic ARN as the resource.
    **"Resource": "YOUR SNS TOPIC ARN"**
    
-4. Create am AWS IAM role for the lambda function to allow the function to publish to the SNS topic. Attach the previuosly created publishing policy and the AWSLambdaBasicExecutionRole policy to the role created.
+4. Create am AWS IAM role for the lambda function to allow the function to publish to the SNS topic. Attach the previously created publishing policy and the AWSLambdaBasicExecutionRole policy to the role created.
 5. Next we need to create a python lambda function that will interract with the NBA API to collect the NBA data, format it, and send it to the subscribed emails in the SNS service. Attach the IAM role created Lambda function created.
 6. Create a Free account with subscription at [sportsdata.io](https://sportsdata.io/) and get your API key.
 7. Create Environment variables for your Lambda function and add the NBA API key and SNS TOPIC ARN.
