@@ -66,30 +66,15 @@ This is a NBA game notification system that allows users to allows users to subs
 9. The email should receive a confrimation email in their inbox.
 10. If that works well you can test the API again on postman to make sure you are getting the confirmation email in your inbox.
 
-
-
+# PART 2: CREATING THE WEB UI FOR USERS WITH HTML/CSS/JS 
+<p>We need to create a form where users can enter their email to subscribe to the game updates.</p>
    
-   
-  
-   
+1. In the sub.html file uder the web_ui folder set the invokeURL.
+2. Run a  python local server using the following command:python3 -m http.server 8080
+3. Go to the browser and search http://localhost:8080/sub.html.
+4. You will view the subscription form , enter an email and click on subscribe. If the set up works well, you should receive a confirmation email in the inbox of the entered email and a message that the email has been sent!!
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<p>Visit the following blog for a more detailed workthrough of the project.</p>
 
 
 ### **Future Enhancements**
