@@ -18,11 +18,9 @@ This is a NBA game notification system that allows users to allows users to subs
 
 ## PART 1: CREATING THE BACKEND SERVICE
 1. Create AWS SNS topic in the AWS SNS service.
-2. Add an Email subscription to the topic created. A confirmation email will be sent to the email used in the subscription. 
-3. Next we need to create a python lambda function that will interract with the NBA API to collect the NBA data, format it, and send it to the subscribed emails in the SNS service.
-4. Create an SNS Publish Policy that will allow us to publish to the SNS topic. Copy the gb_sns_policy.json from the repos and use it to create the policy. Set your topic ARN as the resource.
-   
-{
+2. Add an Email subscription to the topic created. A confirmation email will be sent to the email used in the subscription.
+3. Create an SNS Publish Policy that will allow us to publish to the SNS topic. Copy the gb_sns_policy.json from the repos and use it to create the policy. Set your topic ARN as the resource.
+   {
     "Version": "2012-10-17",
     "Statement": [
         {
@@ -32,13 +30,21 @@ This is a NBA game notification system that allows users to allows users to subs
         }
     ]
 }
-5. Create am AWS IAM role for the lambda function to allow the function to publish to the SNS topic. Attach the previuosly creeated publishing policy and the AWSLambdaBasicExecutionRole policy to the role created. 
-6. Create a Free account with subscription at [sportsdata.io](https://sportsdata.io/) and get your API key.
-7. Create Environment variables for your Lambda function and add the NBA API key and SNS TOPIC ARN.
-  - NBA_API_KEY: your NBA API key.
-  - SNS_TOPIC_ARN: SNS TOPIC ARN
-8. Create a Schedule rule by navigating to the EventBridge service. Set A CRON Job Schedule for how frequent you want the game updates. Attach the Lambda Function to the schedule rule. 
-9. 
+
+4. Create am AWS IAM role for the lambda function to allow the function to publish to the SNS topic. Attach the previuosly creeated publishing policy and the AWSLambdaBasicExecutionRole policy to the role created.
+5. Create a Schedule rule by navigating to the EventBridge service. Set A CRON Job Schedule for how frequent you want the game updates. Attach the Lambda Function to the schedule rule.
+6. Next we need to create a python lambda function that will interract with the NBA API to collect the NBA data, format it, and send it to the subscribed emails in the SNS service.
+7. Create a Free account with subscription at [sportsdata.io](https://sportsdata.io/) and get your API key.
+8. Create Environment variables for your Lambda function and add the NBA API key and SNS TOPIC ARN.
+   - NBA_API_KEY: your NBA API key.
+   - SNS_TOPIC_ARN: SNS TOPIC ARN
+9. Deploy the Lambda function.
+   
+
+
+  
+   
+
 
 
 
