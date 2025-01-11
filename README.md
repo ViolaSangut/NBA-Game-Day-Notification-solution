@@ -78,5 +78,6 @@ This is a NBA game notification system that allows users to allows users to subs
 
 
 ### **Future Enhancements**
-1. Add NFL score alerts for extended functionality.2. Store user preferences (teams, game types) in DynamoDB for personalized alerts.
+1. Add NFL score alerts for extended functionality.
+2. Store user preferences (teams, game types) in DynamoDB for personalized alerts.
 
