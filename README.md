@@ -24,12 +24,12 @@ This is a NBA game notification system that allows users to allows users to subs
    **"Resource": "YOUR SNS TOPIC ARN"**
    
 4. Create am AWS IAM role for the lambda function to allow the function to publish to the SNS topic. Attach the previously created publishing policy and the AWSLambdaBasicExecutionRole policy to the role created.
-5. Next we need to create a python lambda function that will interract with the NBA API to collect the NBA data, format it, and send it to the subscribed emails in the SNS service. Attach the IAM role created Lambda function created.
+5. Next we need to create a python lambda function that will interact with the NBA API to collect the NBA data, format it, and send it to the subscribed emails in the SNS service. Attach the IAM role created Lambda function created.
 6. Create a Free account with subscription at [sportsdata.io](https://sportsdata.io/) and get your API key.
 7. Create Environment variables for your Lambda function and add the NBA API key and SNS TOPIC ARN.
    - NBA_API_KEY: your NBA API key.
    - SNS_TOPIC_ARN: SNS TOPIC ARN
-8.  Deploy the Lambda function.
+8.  Copy the gd_notifications.py to the code section and deploy the Lambda function.
 9. Create a Schedule rule by navigating to the EventBridge service. Set A CRON Job Schedule for how frequent you want the game updates. Attach the Lambda Function to the schedule rule.
 10. Test the Lambda function by running it. the subscribed emails should get game updates in their email when the function is triggered.
 
@@ -48,10 +48,10 @@ This is a NBA game notification system that allows users to allows users to subs
 
 7. The email should receive a confirmation email to sub to the SNS Topic.
 
-<p>So Far we have created a backend service to add subsribers to an SNS Service and another push NBA Updates to the subscribes emails. We finally need to expose these services to users using a frontend service.</p>
+<p>So Far we have created a function to add subscribers to an SNS Service and another to push NBA Updates to the subscribes emails. We finally need to expose these services to users using a frontend service.</p>
 
 1. Navigate to the API Gateway and create a REST API.
-2. Create a POST route for the API.
+2. Create a POST method for the API.
 3. Enable CORS for the API to Allow our frontend service to interact with the API.
 4. Since our frontend will be running on our local host:
    <P>Add **http://localhost:8080** as the **Access-Control-Allow-Origin**.</P>
@@ -70,7 +70,7 @@ This is a NBA game notification system that allows users to allows users to subs
 # PART 2: CREATING THE WEB UI FOR USERS WITH HTML/CSS/JS 
 <p>We need to create a form where users can enter their email to subscribe to the game updates.</p>
    
-1. In the sub.html file uder the web_ui folder set the invokeURL.
+1. In the sub.html file under the web_ui folder set the invokeURL.
 2. Run a  python local server using the following command:python3 -m http.server 8080
 3. Go to the browser and search http://localhost:8080/sub.html.
 4. You will view the subscription form , enter an email and click on subscribe. If the set up works well, you should receive a confirmation email in the inbox of the entered email and a message that the email has been sent!!
